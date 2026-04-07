@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>One Sweet World - Dessert & Baking Recipes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+   
+   
+    :root {
+      --bg:      #fdf8f4;
+      --warm:    #f7ede2;
+      --card-bg: #ffffff;
+      --border:  #edddd0;
+      --ink:     #2b1a0f;
+      --muted:   #8a6f5e;
+      --accent:  #b5451b;
+      --gold:    #c9853a;
+      --blush:   #e8c4a8;
+      --tag-bg:  #f5e8da;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: linear-gradient(180deg, #fdf8f4 0%, #f7ede2 100%);
+      color: var(--ink);
+    }
+
+    /* HEADER */
+    header {
+      background: linear-gradient(135deg, #0b2e1f 0%, #0f3d2b 40%, #062017 100%);
+      padding: 40px 40px 34px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(201,133,58,0.3);
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 20% 50%, rgba(0,255,150,0.08), transparent 60%),
+                  radial-gradient(circle at 80% 30%, rgba(0,200,120,0.08), transparent 60%);
+    }
+    header::after {
+      content: '✦  ✦  ✦';
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #4a3020;
+      font-size: 0.6rem;
+      letter-spacing: 10px;
+    }
+    .header-inner { position: relative; }
+    .header-eyebrow {
+      font-size: 0.65rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--blush);
+      margin-bottom: 10px;
+      font-weight: 300;
+    }
+    header h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1;
+      letter-spacing: -1px;
+    }
+    header h1 em { font-style: italic; color: var(--gold); }
+    header p { color: #a08870; font-size: 0.88rem; margin-top: 10px; font-weight: 300; }
+
+    /* TABS */
+    .tabs {
+      display: flex;
+      justify-content: center;
+      background: var(--ink);
+      border-top: 1px solid #3a2010;
+    }
+    .tab-btn {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      padding: 14px 26px;
+      background: transparent;
+      color: #7a5a48;
+      border: none;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      transition: all 0.2s;
+    }
+    .tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+    .tab-btn:hover:not(.active) { color: #ccc; }
+
+    /* SEARCH */
+    .search-wrap { max-width: 600px; margin: 32px auto 0; padding: 0 20px; }
+    .search-inner {
+      display: flex;
+      border: 2px solid var(--border);
+      border-radius: 50px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+      transition: box-shadow 0.2s, border-color 0.2s;
+    }
+    .search-inner:focus-within { border-color: var(--accent); box-shadow: 0 4px 24px rgba(181,69,27,0.15); }
+    .search-inner input {
+      flex: 1;
+      padding: 13px 22px;
+      border: none;
+      outline: none;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      background: transparent;
+      color: var(--ink);
+    }
+    .search-inner input::placeholder { color: #ccc; }
+    .search-inner button {
+      padding: 13px 26px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .search-inner button:hover { background: #8f3012; }
+
+    /* CHIPS */
+    .filter-section { padding: 24px 20px 0; max-width: 1200px; margin: 0 auto; }
+    .filter-label { font-size: 0.68rem; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      padding: 7px 16px;
+      border-radius: 50px;
+      border: 1.5px solid var(--border);
+      background: #fff;
+      font-size: 0.8rem;
+      font-weight: 500;
+      cursor: pointer;
+      color: var(--muted);
+      transition: all 0.18s;
+    }
+    .chip:hover { border-color: var(--accent); color: var(--accent); }
+    .chip.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .chip-more { background: var(--ink); color: #fff; border-color: var(--ink); }
+    .chip-more:hover, .chip-more.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+    /* MAIN */
+    .main { max-width: 1200px; margin: 0 auto; padding: 30px 20px 70px; }
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 22px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 12px;
+    }
+    .section-title { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-style: italic; color: var(--ink); }
+    .section-count { font-size: 0.78rem; color: var(--muted); font-weight: 300; }
+    .category-group { margin-bottom: 56px; }
+    .category-name {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 20px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--gold);
+    }
+
+    /* GRID */
+    .recipes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 22px; }
+
+    /* CARD */
+    .card {
+      background: var(--card-bg);
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 10px rgba(43,26,15,0.06);
+      cursor: pointer;
+      transition: transform 0.22s, box-shadow 0.22s;
+      display: flex;
+      flex-direction: column;
+      animation: fadeIn 0.4s ease;
+    }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 12px 36px rgba(43,26,15,0.13); }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .card-img-wrap { position: relative; overflow: hidden; aspect-ratio: 4/3; }
+    .card-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.38s; }
+    .card:hover .card-img-wrap img { transform: scale(1.08); }
+    .card-category-tag {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(43,26,15,0.72);
+      color: #fff;
+      font-size: 0.67rem;
+      font-weight: 500;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 50px;
+      backdrop-filter: blur(4px);
+    }
+    .card-body { padding: 15px 17px 16px; flex: 1; display: flex; flex-direction: column; gap: 9px; }
+    .card-title { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 700; line-height: 1.25; color: var(--ink); }
+    .card-origin { font-size: 0.75rem; color: var(--muted); font-weight: 300; }
+    .macro-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 3px;
+      background: var(--warm);
+      border-radius: 9px;
+      padding: 7px 5px;
+    }
+    .macro-item { text-align: center; }
+    .macro-val { font-size: 0.82rem; font-weight: 700; color: var(--accent); display: block; }
+    .macro-lbl { font-size: 0.58rem; text-transform: uppercase; letter-spacing: 0.4px; color: var(--muted); }
+    .card-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: auto; }
+    .tag { background: var(--tag-bg); color: var(--muted); font-size: 0.68rem; padding: 3px 9px; border-radius: 50px; font-weight: 500; }
+    .card-btn {
+      margin: 0 16px 14px;
+      padding: 10px;
+      background: var(--ink);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.18s, transform 0.2s;
+      width: calc(100% - 32px);
+    }
+    .card-btn:hover { background: var(--accent); transform: scale(1.03); }
+
+    /* MORE POPUP */
+    .more-popup-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(20,8,0,0.6);
+      z-index: 999;
+      backdrop-filter: blur(4px);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .more-popup-overlay.open { display: flex; }
+    .more-popup {
+      background: var(--bg);
+      border-radius: 16px;
+      width: 100%;
+      max-width: 460px;
+      max-height: 70vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      animation: slideUp 0.25s ease;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+    .more-popup-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 22px;
+      border-bottom: 1px solid var(--border);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+    .more-popup-header button {
+      background: none;
+      border: none;
+      font-size: 1.1rem;
+      cursor: pointer;
+      color: var(--muted);
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s;
+    }
+    .more-popup-header button:hover { background: var(--warm); color: var(--ink); }
+    .more-popup-list {
+      overflow-y: auto;
+      padding: 12px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .more-popup-sublabel {
+      grid-column: 1 / -1;
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 2px 4px 6px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 4px;
+    }
+    .more-item {
+      padding: 12px 16px;
+      border-radius: 10px;
+      border: 1.5px solid var(--border);
+      background: #fff;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--ink);
+      transition: all 0.15s;
+    }
+    .more-item:hover { border-color: var(--accent); color: var(--accent); background: #fff8f5; }
+
+    /* MODAL */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(20,8,0,0.78);
+      z-index: 1000;
+      backdrop-filter: blur(5px);
+      padding: 20px;
+      overflow-y: auto;
+    }
+    .modal-overlay.open { display: flex; align-items: flex-start; justify-content: center; }
+    .modal {
+      background: var(--bg);
+      border-radius: 20px;
+      max-width: 800px;
+      width: 100%;
+      margin: auto;
+      overflow: hidden;
+      animation: slideUp 0.3s ease;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(30px); opacity: 0; }
+      to   { transform: translateY(0);    opacity: 1; }
+    }
+
+    .modal-hero { position: relative; }
+    .modal-hero img { width: 100%; max-height: 320px; object-fit: cover; display: block; }
+    .modal-close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: rgba(0,0,0,0.55);
+      color: #fff;
+      border: none;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      font-size: 1.1rem;
+      cursor: pointer;
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.18s;
+    }
+    .modal-close:hover { background: var(--accent); }
+    .modal-badge {
+      position: absolute;
+      bottom: 14px;
+      left: 20px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 50px;
+    }
+    .modal-content { padding: 28px 32px 36px; }
+    .modal-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.5rem, 4vw, 2.1rem);
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.2;
+    }
+    .modal-meta { display: flex; gap: 14px; flex-wrap: wrap; margin: 10px 0 22px; }
+    .modal-meta-item { font-size: 0.78rem; color: var(--muted); display: flex; align-items: center; gap: 4px; }
+    .macro-full {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+    @media (max-width: 520px) { .macro-full { grid-template-columns: repeat(3, 1fr); } }
+    .macro-box { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 14px 10px; text-align: center; }
+    .macro-box .val { font-size: 1.1rem; font-weight: 700; color: var(--accent); display: block; }
+    .macro-box .lbl { font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted); margin-top: 2px; }
+    .modal-section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .modal-section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .ingredients-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+    .ingredient-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 11px;
+      font-size: 0.8rem;
+      color: var(--ink);
+    }
+    .ingredient-item img { width: 26px; height: 26px; object-fit: contain; border-radius: 4px; }
+    .ingredient-measure { color: var(--muted); font-size: 0.7rem; }
+    .steps-list { display: flex; flex-direction: column; gap: 14px; margin-bottom: 24px; }
+    .step-item { display: flex; gap: 14px; align-items: flex-start; }
+    .step-num {
+      min-width: 28px;
+      height: 28px;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .step-text { font-size: 0.86rem; line-height: 1.68; color: #3a2015; }
+    .modal-video-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 22px;
+      background: #ff0000;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      margin-top: 8px;
+      transition: background 0.18s;
+    }
+    .modal-video-btn:hover { background: #cc0000; }
+
+    /* LOADER / EMPTY */
+    .loader { text-align: center; padding: 70px 20px; color: var(--muted); font-size: 0.88rem; }
+    .loader-spinner {
+      display: inline-block;
+      width: 34px;
+      height: 34px;
+      border: 3px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.75s linear infinite;
+      margin-bottom: 14px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .empty { text-align: center; padding: 70px 20px; color: var(--muted); }
+    .empty-icon { font-size: 3rem; margin-bottom: 12px; }
+
+    @media (max-width: 600px) {
+      .modal-content { padding: 20px 18px 28px; }
+      header { padding: 28px 20px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="header-eyebrow">Desserts &amp; Baking</div>
+    <h1>One <em>Sweet World</em></h1>
+    <p>Cakes, pastries, puddings &amp; everything in between</p>
+  </div>
+</header>
+
+<!-- TAB NAVIGATION -->
+<div class="tabs">
+  <button class="tab-btn active" onclick="switchTab('category')">By Category</button>
+  <button class="tab-btn" onclick="switchTab('ingredient')">By Ingredient</button>
+  <button class="tab-btn" onclick="switchTab('search')">Search</button>
+</div>
+
+<!-- Category Tab -->
+<div id="tab-category" class="tab-panel">
+  <div class="filter-section">
+    <div class="filter-label">Dessert Type</div>
+    <div class="chips" id="categoryChips"></div>
+  </div>
+</div>
+
+<!-- Ingredient Tab -->
+<div id="tab-ingredient" class="tab-panel" style="display:none">
+  <div class="filter-section">
+    <div class="filter-label">Filter by Ingredient</div>
+    <div class="chips" id="ingredientChips"></div>
+  </div>
+</div>
+
+<!-- Search Tab -->
+<div id="tab-search" class="tab-panel" style="display:none">
+  <div class="search-wrap">
+    <div class="search-inner">
+      <input type="text" id="searchInput" placeholder="Search desserts… (e.g. chocolate cake, tart, brownie)"
+             onkeydown="if(event.key==='Enter') doSearch()">
+      <button onclick="doSearch()">Search</button>
+    </div>
+  </div>
+</div>
+
+<!-- Recipe Results -->
+<div class="main" id="mainContent">
+  <div class="loader"><div class="loader-spinner"></div><br>Loading sweets…</div>
+</div>
+
+<!-- "More" Category Popup -->
+<div class="more-popup-overlay" id="morePopup" onclick="closeMoreBg(event)">
+  <div class="more-popup">
+    <div class="more-popup-header">
+      <span>All Categories</span>
+      <button onclick="closeMore()">✕</button>
+    </div>
+    <div class="more-popup-list" id="moreList"></div>
+  </div>
+</div>
+
+<!-- Recipe Detail Modal -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOnBg(event)">
+  <div class="modal">
+    <div class="modal-hero">
+      <img id="modalImg" src="" alt="">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <span class="modal-badge" id="modalBadge"></span>
+    </div>
+    <div class="modal-content">
+      <h2 class="modal-title" id="modalTitle"></h2>
+      <div class="modal-meta" id="modalMeta"></div>
+      <div class="macro-full" id="modalMacros"></div>
+      <div class="modal-section-title">Ingredients</div>
+      <div class="ingredients-grid" id="modalIngredients"></div>
+      <div class="modal-section-title">Instructions</div>
+      <div class="steps-list" id="modalSteps"></div>
+      <div id="modalVideo"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ── API CONFIGURATION ──────────────────────────────────────
+  const MEALDB_BASE = 'https://www.themealdb.com/api/json/v1/1/';
+  const SPOON_KEY   = '21dcb3179b2a4d69bb3ddcb353e41e6f';
+  const SPOON_BASE  = 'https://api.spoonacular.com/recipes';
+
+  // Categories shown as main filter chips
+  const MAIN_CATS   = ['Dessert', 'Cake', 'Pastry'];
+
+  // Ingredients shown in the ingredient tab
+  const BAKING_INGS = ['Butter','Flour','Sugar','Eggs','Chocolate','Vanilla Extract',
+                       'Baking Powder','Cream Cheese','Honey','Cocoa Powder','Milk','Heavy Cream'];
+
+  // In-memory recipe cache so we don't re-fetch the same recipe twice
+  const cache = {};
+
+  let allCategories    = [];
+  let selectedCategory = null;
+  let selectedIngredients = [];
+
+  // ── SPOONACULAR HELPERS ────────────────────────────────────
+
+  // Converts a Spoonacular API result into the same shape as a MealDB meal object
+  function spoonToMeal(r) {
+    return {
+      _source:      'spoon',
+      idMeal:       'sp_' + r.id,
+      spoonId:      r.id,
+      strMeal:      r.title,
+      strMealThumb: r.image || 'https://via.placeholder.com/400x300?text=No+Image',
+      strCategory:  (r.dishTypes && r.dishTypes[0]) || 'Baking',
+      strArea:      (r.cuisines  && r.cuisines[0])  || '',
+      strTags:      (r.diets     || []).join(','),
+      strInstructions: r._instructions || '',
+      _ingredients: r._ingredients || [],
+      strYoutube:   '',
+    };
+  }
+
+  // Search Spoonacular for dessert recipes matching a query
+  async function fetchSpoonRecipes(query, number = 8) {
+    if (!SPOON_KEY) return [];
+    try {
+      const url = `${SPOON_BASE}/complexSearch?apiKey=${SPOON_KEY}&query=${encodeURIComponent(query)}`
+                + `&number=${number}&type=dessert,snack&addRecipeInformation=true&instructionsRequired=true`;
+      const data = await fetch(url).then(r => r.json());
+      const meals = (data.results || []).map(spoonToMeal);
+      meals.forEach(m => { cache[m.idMeal] = m; });
+      return meals;
+    } catch { return []; }
+  }
+
+  // Fetch full details for a single Spoonacular recipe (used when opening the modal)
+  async function fetchSpoonFull(spoonId) {
+    if (!SPOON_KEY) return null;
+    try {
+      const data = await fetch(`${SPOON_BASE}/${spoonId}/information?apiKey=${SPOON_KEY}&includeNutrition=false`).then(r => r.json());
+      const ings  = (data.extendedIngredients || []).map(i => ({ name: i.name, measure: i.original }));
+      const steps = (data.analyzedInstructions?.[0]?.steps || []).map(s => s.step).join('\n');
+      return { ...spoonToMeal(data), strInstructions: steps, _ingredients: ings };
+    } catch { return null; }
+  }
+
+  // ── NUTRITION ESTIMATE ─────────────────────────────────────
+  // Since MealDB doesn't provide nutrition data, we estimate it from the recipe type and ingredient count
+  function estimateNutrition(meal) {
+    const cat = (meal.strCategory || '').toLowerCase();
+    let cal   = 300 + countIngredients(meal) * 22;
+    if (cat.includes('cake') || cat.includes('pastry') || cat.includes('dessert')) cal += 140;
+    if (cat.includes('vegan') || cat.includes('vegetarian'))                       cal -= 50;
+    cal = Math.round(cal / 10) * 10;
+    return {
+      cal,
+      protein: Math.round(cal * 0.07 / 4),
+      carbs:   Math.round(cal * 0.58 / 4),
+      fat:     Math.round(cal * 0.32 / 9),
+      sugar:   Math.round((cal * 0.58 / 4) * 0.55),
+    };
+  }
+
+  function countIngredients(meal) {
+    let c = 0;
+    for (let i = 1; i <= 20; i++) if (meal['strIngredient'+i]?.trim()) c++;
+    return c;
+  }
+
+  // Extract the ingredient list from a MealDB meal object
+  function getIngredients(meal) {
+    const list = [];
+    for (let i = 1; i <= 20; i++) {
+      const ing = meal['strIngredient'+i]?.trim();
+      const msr = meal['strMeasure'+i]?.trim();
+      if (ing) list.push({ name: ing, measure: msr || '' });
+    }
+    return list;
+  }
+
+  // ── TAB SWITCHING ──────────────────────────────────────────
+  function switchTab(tab) {
+    document.querySelectorAll('.tab-btn').forEach((b, i) =>
+      b.classList.toggle('active', ['category','ingredient','search'][i] === tab)
+    );
+    document.querySelectorAll('.tab-panel').forEach(p => p.style.display = 'none');
+    document.getElementById('tab-' + tab).style.display = 'block';
+
+    if (tab === 'category')   selectedCategory ? loadCategoryRecipes(selectedCategory) : showAll();
+    if (tab === 'ingredient') {
+      buildIngChips();
+      selectedIngredients.length
+        ? loadMultipleIngredients()
+        : setMain('<div class="empty"><div class="empty-icon">🧈</div><p>Pick an ingredient above</p></div>');
+    }
+    if (tab === 'search') setMain('<div class="empty"><div class="empty-icon">🔍</div><p>Search for any dessert or bake</p></div>');
+  }
+
+  // ── INITIALISATION ─────────────────────────────────────────
+  async function init() {
+    const data = await fetch(MEALDB_BASE + 'categories.php').then(r => r.json());
+    allCategories = data.categories.map(c => c.strCategory).filter(c => c !== 'Unknown');
+    buildCategoryChips();
+    showAll();
+  }
+
+  // ── CATEGORY CHIPS ─────────────────────────────────────────
+  function buildCategoryChips() {
+    const shown = MAIN_CATS.filter(c => allCategories.includes(c));
+    document.getElementById('categoryChips').innerHTML =
+      '<span class="chip active" onclick="onCatChip(this, null)">All Sweets</span>' +
+      shown.map(c => `<span class="chip" onclick="onCatChip(this,'${c}')">${c}</span>`).join('') +
+      '<span class="chip chip-more" onclick="openMore()">More ▾</span>';
+
+    document.getElementById('moreList').innerHTML = `
+      <div class="more-popup-sublabel">Diet</div>
+      <div class="more-item" onclick="pickMore('Vegan')">Vegan</div>
+      <div class="more-item" onclick="pickMore('Vegetarian')">Vegetarian</div>
+      <div class="more-item" onclick="pickMore('All')">All</div>
+      <div class="more-popup-sublabel" style="margin-top:8px">Eggs</div>
+      <div class="more-item" onclick="pickMoreEgg('eggless')">Eggless</div>
+      <div class="more-item" onclick="pickMoreEgg('egg')">With Egg</div>`;
+  }
+
+  function onCatChip(el, cat) {
+    document.querySelectorAll('#categoryChips .chip').forEach(c => c.classList.remove('active'));
+    el.classList.add('active');
+    document.querySelector('.chip-more').textContent = 'More ▾';
+    selectedCategory = cat;
+    cat ? loadCategoryRecipes(cat) : showAll();
+  }
+
+  function openMore()          { document.getElementById('morePopup').classList.add('open'); }
+  function closeMore()         { document.getElementById('morePopup').classList.remove('open'); }
+  function closeMoreBg(e)      { if (e.target === document.getElementById('morePopup')) closeMore(); }
+
+  function pickMore(cat) {
+    closeMore();
+    document.querySelectorAll('#categoryChips .chip').forEach(c => c.classList.remove('active'));
+    const btn = document.querySelector('.chip-more');
+    btn.classList.add('active');
+    btn.textContent = cat + ' ▾';
+    selectedCategory = cat === 'All' ? null : cat;
+    selectedCategory ? loadCategoryRecipes(selectedCategory) : showAll();
+  }
+
+  // Filter all baking recipes by whether they contain eggs
+  async function pickMoreEgg(type) {
+    closeMore();
+    document.querySelectorAll('#categoryChips .chip').forEach(c => c.classList.remove('active'));
+    const btn = document.querySelector('.chip-more');
+    btn.classList.add('active');
+    btn.textContent = (type === 'eggless' ? 'Eggless' : 'With Egg') + ' ▾';
+    selectedCategory = null;
+    setMain(`<div class="loader"><div class="loader-spinner"></div><br>Finding recipes…</div>`);
+
+    const allMeals = (await Promise.all(MAIN_CATS.map(c => fetchCategoryMeals(c, 20)))).flat();
+    const mealDbFiltered = allMeals.filter(m => {
+      const ings = [];
+      for (let i = 1; i <= 20; i++) { const v = m['strIngredient'+i]?.trim().toLowerCase(); if (v) ings.push(v); }
+      const hasEgg = ings.some(i => ['egg','eggs','egg yolk','egg yolks','egg white','egg whites'].includes(i));
+      return type === 'eggless' ? !hasEgg : hasEgg;
+    });
+
+    let spoonResults = [];
+    try {
+      const q = type === 'eggless' ? 'dessert baking' : 'egg cake custard dessert';
+      const extra = type === 'eggless' ? '&intolerances=egg' : '';
+      const data = await fetch(`${SPOON_BASE}/complexSearch?apiKey=${SPOON_KEY}&query=${q}&number=16&addRecipeInformation=true&instructionsRequired=true${extra}`).then(r => r.json());
+      spoonResults = (data.results || []).map(spoonToMeal);
+      spoonResults.forEach(m => { cache[m.idMeal] = m; });
+    } catch {}
+
+    const combined = [...mealDbFiltered, ...spoonResults];
+    if (!combined.length) {
+      setMain(`<div class="empty"><div class="empty-icon">🥚</div><p>No recipes found.</p></div>`);
+      return;
+    }
+    document.getElementById('mainContent').innerHTML = `
+      <div class="section-header">
+        <span class="section-title">${type === 'eggless' ? 'Eggless Bakes' : 'Recipes with Egg'}</span>
+        <span class="section-count">${combined.length} recipes</span>
+      </div>
+      <div class="recipes-grid">${combined.map(cardHTML).join('')}</div>`;
+  }
+
+  // ── SHOW ALL (homepage view, grouped by category) ──────────
+  async function showAll() {
+    setMain('<div class="loader"><div class="loader-spinner"></div><br>Loading sweets…</div>');
+    const groups = await Promise.all(MAIN_CATS.map(async cat => {
+      const [mealDbResults, spoonResults] = await Promise.all([
+        fetchCategoryMeals(cat, 12),
+        fetchSpoonRecipes(cat.toLowerCase(), 8)
+      ]);
+      return { cat, meals: [...mealDbResults, ...spoonResults] };
+    }));
+
+    const html = groups
+      .filter(g => g.meals.length)
+      .map(g => `
+        <div class="category-group">
+          <div class="category-name">${g.cat}</div>
+          <div class="recipes-grid">${g.meals.map(cardHTML).join('')}</div>
+        </div>`)
+      .join('');
+
+    document.getElementById('mainContent').innerHTML = html ||
+      '<div class="empty"><div class="empty-icon">🍰</div><p>Nothing found.</p></div>';
+  }
+
+  // Fetch a list of meals in a MealDB category (returns full meal objects)
+  async function fetchCategoryMeals(cat, limit = 12) {
+    const data = await fetch(MEALDB_BASE + 'filter.php?c=' + encodeURIComponent(cat)).then(r => r.json());
+    if (!data.meals) return [];
+    return Promise.all(data.meals.slice(0, limit).map(m => fetchFull(m.idMeal)));
+  }
+
+  // Load a single category and display results
+  async function loadCategoryRecipes(cat) {
+    setMain(`<div class="loader"><div class="loader-spinner"></div><br>Loading ${cat}…</div>`);
+    const [mealDbResults, spoonResults] = await Promise.all([
+      fetchCategoryMeals(cat, 12),
+      fetchSpoonRecipes(cat, 8)
+    ]);
+    const meals = [...mealDbResults, ...spoonResults];
+    if (!meals.length) { setMain('<div class="empty"><div class="empty-icon">🍰</div><p>No recipes found.</p></div>'); return; }
+    document.getElementById('mainContent').innerHTML = `
+      <div class="section-header">
+        <span class="section-title">${cat}</span>
+        <span class="section-count">${meals.length} recipes</span>
+      </div>
+      <div class="recipes-grid">${meals.map(cardHTML).join('')}</div>`;
+  }
+
+  // ── INGREDIENT TAB ─────────────────────────────────────────
+  function buildIngChips() {
+    const wrap = document.getElementById('ingredientChips');
+    if (wrap.innerHTML) return; // already built
+    wrap.innerHTML = BAKING_INGS.map(i =>
+      `<span class="chip" onclick="onIngChip(this,'${i}')">${i}</span>`).join('');
+  }
+
+  function onIngChip(el, ing) {
+    if (selectedIngredients.includes(ing)) {
+      selectedIngredients = selectedIngredients.filter(i => i !== ing);
+      el.classList.remove('active');
+    } else {
+      selectedIngredients.push(ing);
+      el.classList.add('active');
+    }
+    selectedIngredients.length
+      ? loadMultipleIngredients()
+      : setMain('<div class="empty"><div class="empty-icon">🧈</div><p>Select ingredients</p></div>');
+  }
+
+  // Find recipes that contain ALL selected ingredients (intersection)
+  async function loadMultipleIngredients() {
+    setMain(`<div class="loader"><div class="loader-spinner"></div><br>Finding matching recipes…</div>`);
+    const idSets = await Promise.all(selectedIngredients.map(async ing => {
+      const data = await fetch(MEALDB_BASE + 'filter.php?i=' + encodeURIComponent(ing)).then(r => r.json());
+      return (data.meals || []).map(m => m.idMeal);
+    }));
+    const commonIds = idSets.reduce((a, b) => a.filter(x => b.includes(x)));
+    if (!commonIds.length) {
+      setMain('<div class="empty"><div class="empty-icon">❌</div><p>No common recipes found</p></div>');
+      return;
+    }
+    const meals = await Promise.all(commonIds.slice(0, 12).map(fetchFull));
+    document.getElementById('mainContent').innerHTML = `
+      <div class="section-header">
+        <span class="section-title">Matching Recipes</span>
+        <span class="section-count">${meals.length} recipes</span>
+      </div>
+      <div class="recipes-grid">${meals.map(cardHTML).join('')}</div>`;
+  }
+
+  // ── SEARCH ─────────────────────────────────────────────────
+  async function doSearch() {
+    const q = document.getElementById('searchInput').value.trim();
+    if (!q) return;
+    setMain('<div class="loader"><div class="loader-spinner"></div><br>Searching…</div>');
+    const [mealRes, spoonRes] = await Promise.all([
+      fetch(MEALDB_BASE + 'search.php?s=' + encodeURIComponent(q)).then(r => r.json()),
+      fetchSpoonRecipes(q, 8)
+    ]);
+    const combined = [...(mealRes.meals || []), ...spoonRes];
+    if (!combined.length) {
+      setMain(`<div class="empty"><div class="empty-icon">🔍</div><p>No results for "${q}"</p></div>`);
+      return;
+    }
+    document.getElementById('mainContent').innerHTML = `
+      <div class="section-header">
+        <span class="section-title">Results for "${q}"</span>
+        <span class="section-count">${combined.length} recipes</span>
+      </div>
+      <div class="recipes-grid">${combined.map(cardHTML).join('')}</div>`;
+  }
+
+  // ── DATA FETCHING ──────────────────────────────────────────
+  // Fetch a full MealDB meal by ID, using the cache to avoid duplicate requests
+  async function fetchFull(id) {
+    if (cache[id]) return cache[id];
+    const data  = await fetch(MEALDB_BASE + 'lookup.php?i=' + id).then(r => r.json());
+    cache[id]   = data.meals[0];
+    return cache[id];
+  }
+
+  // ── CARD HTML ──────────────────────────────────────────────
+  function cardHTML(meal) {
+    const n     = estimateNutrition(meal);
+    const tags  = meal.strTags ? meal.strTags.split(',').slice(0,3) : [];
+    const thumb = meal._source === 'spoon' ? meal.strMealThumb : meal.strMealThumb + '/medium';
+    return `<div class="card" onclick="openModal('${meal.idMeal}')">
+      <div class="card-img-wrap">
+        <img src="${thumb}" loading="lazy" alt="${meal.strMeal}">
+        <span class="card-category-tag">${meal.strCategory || ''}</span>
+      </div>
+      <div class="card-body">
+        <div class="card-title">${meal.strMeal}</div>
+        <div class="card-origin">${meal.strArea || ''}</div>
+        <div class="macro-strip">
+          <div class="macro-item"><span class="macro-val">${n.cal}</span><span class="macro-lbl">kcal</span></div>
+          <div class="macro-item"><span class="macro-val">${n.carbs}g</span><span class="macro-lbl">Carbs</span></div>
+          <div class="macro-item"><span class="macro-val">${n.sugar}g</span><span class="macro-lbl">Sugar</span></div>
+          <div class="macro-item"><span class="macro-val">${n.fat}g</span><span class="macro-lbl">Fat</span></div>
+        </div>
+        ${tags.length ? `<div class="card-tags">${tags.map(t=>`<span class="tag">${t.trim()}</span>`).join('')}</div>` : ''}
+      </div>
+      <button class="card-btn">View Full Recipe →</button>
+    </div>`;
+  }
+
+  // ── MODAL ──────────────────────────────────────────────────
+  async function openModal(id) {
+    document.getElementById('modalOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    document.getElementById('modalTitle').textContent = 'Loading…';
+    document.getElementById('modalImg').src = '';
+    document.getElementById('modalIngredients').innerHTML = '';
+    document.getElementById('modalSteps').innerHTML = '';
+
+    let meal;
+    if (String(id).startsWith('sp_')) {
+      meal = cache[id] || await fetchSpoonFull(id.replace('sp_', ''));
+      if (meal) cache[id] = meal;
+    } else {
+      meal = await fetchFull(id);
+    }
+    if (!meal) { closeModal(); return; }
+
+    const n    = estimateNutrition(meal);
+    const ings = meal._source === 'spoon' ? (meal._ingredients || []) : getIngredients(meal);
+    const tags = meal.strTags ? meal.strTags.split(',').slice(0,5) : [];
+
+    document.getElementById('modalImg').src      = meal._source === 'spoon' ? meal.strMealThumb : meal.strMealThumb + '/preview';
+    document.getElementById('modalBadge').textContent = meal.strCategory || meal.strArea || '';
+    document.getElementById('modalTitle').textContent = meal.strMeal;
+
+    document.getElementById('modalMeta').innerHTML =
+      `<span class="modal-meta-item">${meal.strCategory || '—'}</span>
+       ${meal.strArea ? `<span class="modal-meta-item">${meal.strArea}</span>` : ''}
+       <span class="modal-meta-item">${ings.length} ingredients</span>
+       ${tags.map(t=>`<span class="modal-meta-item tag">${t.trim()}</span>`).join('')}`;
+
+    document.getElementById('modalMacros').innerHTML =
+      ['Calories','Carbs','Sugar','Fat','Protein']
+        .map((lbl, i) => {
+          const vals = [n.cal, `${n.carbs}g`, `${n.sugar}g`, `${n.fat}g`, `${n.protein}g`];
+          return `<div class="macro-box"><span class="val">${vals[i]}</span><span class="lbl">${lbl}</span></div>`;
+        }).join('');
+
+    document.getElementById('modalIngredients').innerHTML = ings.map(i =>
+      `<div class="ingredient-item">
+        <img src="https://www.themealdb.com/images/ingredients/${encodeURIComponent(i.name)}-Small.png" onerror="this.style.display='none'" alt="${i.name}">
+        <div><div>${i.name}</div><div class="ingredient-measure">${i.measure}</div></div>
+      </div>`).join('');
+
+    const steps = (meal.strInstructions || '')
+      .split(/\r?\n+/)
+      .map(s => s.replace(/^(step\s*\d+[:.]\s*)/i, '').trim())
+      .filter(s => s.length > 10);
+    document.getElementById('modalSteps').innerHTML = steps.map((s, i) =>
+      `<div class="step-item">
+        <div class="step-num">${i+1}</div>
+        <div class="step-text">${s}</div>
+      </div>`).join('');
+
+    document.getElementById('modalVideo').innerHTML = meal.strYoutube
+      ? `<a class="modal-video-btn" href="${meal.strYoutube}" target="_blank">▶ Watch on YouTube</a>` : '';
+  }
+
+  function closeModal()       { document.getElementById('modalOverlay').classList.remove('open'); document.body.style.overflow = ''; }
+  function closeModalOnBg(e)  { if (e.target === document.getElementById('modalOverlay')) closeModal(); }
+  function setMain(html)      { document.getElementById('mainContent').innerHTML = html; }
+
+  init();
+</script>
+</body>
+</html>
