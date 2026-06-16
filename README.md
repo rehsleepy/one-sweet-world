@@ -1,2 +1,2 @@
 # one-sweet-world
-Recipe website for desserts
+Recipe website for desserts.
